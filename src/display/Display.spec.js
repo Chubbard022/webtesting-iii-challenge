@@ -2,6 +2,7 @@ import React from "react"
 import {render,cleanup,fireEvent,getByTestId} from "react-testing-library"
 import Display from "./Display"
 import Controls from "../controls/Controls"
+import 'Jest-dom/extend-expect'
 import Dashboard from "../dashboard/Dashboard"
 
 describe("<Display/>",()=>{
@@ -31,6 +32,36 @@ describe("<Display/>",()=>{
     })
     it("should display closed if true",()=>{
         const display_component = render(<Display closed={true} />)
-        display_component.getByText(/open|closed/gi)
+
+        display_component.getByText(/open|closed/i)
+    })
+    it("displays Locked if the locked prop is true",()=>{
+        const display_component = render(<Display locked={true} />)
+
+        display_component.getByText(/Locked/i)
+    })
+    it("should display green-led class when locked is false",()=>{
+        const display_component = render(<Display locked={false}/>)
+        const testId = display_component.getByTestId("lock")
+        
+        expect(testId).toHaveClass("green-led")
+    })
+    it("should display green-led class when closed is false",()=>{
+        const display_component = render(<Display closed={false}/>)
+        const testId = display_component.getByTestId("gate")
+        
+        expect(testId).toHaveClass("green-led")
+    })
+    it("should display red-led class when locked is true",()=>{
+        const display_component = render(<Display locked={true}/>)
+        const testId = display_component.getByTestId("lock")
+        
+        expect(testId).toHaveClass("led green-led")
+    })
+    it("should display red-led class when closed is true",()=>{
+        const display_component = render(<Display closed={true}/>)
+        const testId = display_component.getByTestId("gate")
+        
+        expect(testId).toHaveClass("led green-led")
     })
 })
