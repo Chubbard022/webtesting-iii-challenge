@@ -14,10 +14,19 @@ describe("<Display/>",()=>{
     it("should display closed when close gate button is pressed ",()=>{
         const display_component = render(<Display />)
         const dash_component = render(<Dashboard/>)
-
         const button = display_component.getByText(/close gate/i)
 
         fireEvent.click(button)
         dash_component.getByText(/closed/i)
+    })
+    it("should display locked when gate closed and locked button clicked ",()=>{
+        const display_component = render(<Display />)
+        const dash_component = render(<Dashboard/>)
+        const firstButton = display_component.getByText(/close gate/i)
+        const secondButton = display_component.getByText(/lock gate/i)
+
+        fireEvent.click(firstButton)
+        fireEvent.click(secondButton)
+        dash_component.getByText(/locked/i)
     })
 })
