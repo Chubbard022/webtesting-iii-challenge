@@ -14,4 +14,14 @@ describe("<Controls/>",()=>{
         fireEvent.click(button)
         display_component.getByText(/unlocked/i)
     })
+    it("should show locked after locking gate button pressed",()=>{
+        const control_component = render(<Controls/>)
+        const display_component = render(<Display />)
+        const firstButton = control_component.getByText(/close gate/i)
+        const secondButton = control_component.getByText(/lock gate/i)
+
+        fireEvent.click(firstButton)
+        fireEvent.click(secondButton)
+        control_component.getByText(/locked/i)
+    })
 })
