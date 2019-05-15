@@ -5,6 +5,8 @@ import Controls from "../controls/Controls"
 import 'Jest-dom/extend-expect'
 import Dashboard from "../dashboard/Dashboard"
 
+afterEach(cleanup)
+
 describe("<Display/>",()=>{
     it("should display unlocked and Open without buttons pressed" ,()=>{
         const display_component = render(<Display />)
@@ -56,12 +58,12 @@ describe("<Display/>",()=>{
         const display_component = render(<Display locked={true}/>)
         const testId = display_component.getByTestId("lock")
         
-        expect(testId).toHaveClass("led green-led")
+        expect(testId).toHaveClass("red-led")
     })
     it("should display red-led class when closed is true",()=>{
         const display_component = render(<Display closed={true}/>)
         const testId = display_component.getByTestId("gate")
         
-        expect(testId).toHaveClass("led green-led")
+        expect(testId).toHaveClass("red-led")
     })
 })
