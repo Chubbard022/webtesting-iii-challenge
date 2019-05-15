@@ -29,4 +29,8 @@ describe("<Display/>",()=>{
         fireEvent.click(secondButton)
         dash_component.getByText(/locked/i)
     })
+    it("should display closed if true",()=>{
+        const display_component = render(<Display closed={true} />)
+        display_component.getByText(/open|closed/gi)
+    })
 })
