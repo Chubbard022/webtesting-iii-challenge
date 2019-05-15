@@ -9,4 +9,11 @@ describe("<Dashboard/>",()=>{
         dash_component.getByText(/open/i)
         dash_component.getByText(/unlocked/i)
     })
+    it("should change open gate when button pressed",()=>{
+        const dash_component = render(<Dashboard/>)
+        const button = dash_component.getByText(/close gate/i)
+
+        fireEvent.click(button)
+        dash_component.getByText(/open gate/i)
+    })
 })
